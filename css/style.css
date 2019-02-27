@@ -1,5 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Ubuntu:300);
-@import url('https://fonts.googleapis.com/css?family=Prosto+One');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
 
 * {box-sizing: border-box;}
 
@@ -10,7 +9,6 @@ body {
   letter-spacing: 0.1em;
   font-size: 1.3em;
   font-weight: 300;
-  text-rendering: optimizeLegibility;
   text-align: center;
 }
 
