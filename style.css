@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+* {box-sizing: border-box;}
+
+body {
+  background-color: #1a1a1a;
+  color: #fefefe;
+  font-family: 'Ubuntu';
+  letter-spacing: 0.1em;
+  font-size: 1.3em;
+  font-weight: 300;
+  text-align: center;
+}
+
+.titletext {
+	font-size: 140px;
+  color: #92FF8A
+}
+
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+a {
+  text-decoration: none;
+  color: #B9FFA3;
+}
+a:hover {
+	color: #40FFA3;
+}
+.name {
+	font-size: 30px;
+	font-weight: bold;
+}
