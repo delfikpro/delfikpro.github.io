@@ -3,8 +3,10 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Зарегистрированых игроков</title>
+		<link rel="stylesheet" href="odometer-theme-minimal.css" />
+		<script src="odometer.js"></script>
 		<script type="text/javascript" src="vimeworld.js"></script>
-		<script type="text/javascript">refreshData();</script>
+		<script type="text/javascript">refreshData(); setInterval(refreshData, 10000);</script>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="css/style.css">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -13,7 +15,7 @@
 
 	<body>
 		<div class="container">
-			<div class="titletext" id="playercount">Загрузка данных...</div>
+			<div class="titletext odometer odometer-theme-minimal" id="playercount">4000000</div><br>
 			<span id="pluralshit">Игроков зарегистрировано</span> на <a href="http://vimeworld.ru">VimeWorld</a>
 			<hr>
 		</div>
