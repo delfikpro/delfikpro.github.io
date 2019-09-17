@@ -1,0 +1,44 @@
+<style type="text/css">
+	body {
+		font-family: "courier";
+	}
+</style>
+<script type="text/javascript">
+	function httpGet(theUrl, callback) {
+	    var xmlHttp = new XMLHttpRequest();
+	    xmlHttp.onreadystatechange = function() { 
+	        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+	            callback(xmlHttp.responseText);
+	    }
+	    xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+	    xmlHttp.send(null);
+	}
+
+	ranks = {
+		PLAYER: "§7",
+		VIP: "§a[V] ",
+		PREMIUM: "§b[P] ",
+		HOLY: "§6[H] ",
+		IMMORTAL: "§d[I] ",
+		BUILDER: "§2[Билдер] ",
+		MAPLEAD: "§2[Гл. билдер] ",
+		YOUTUBE: "§c[You§fTube§c] ",
+		DEV: "§3[Dev] ",
+		ORGANIZER: "§3[Организатор] ",
+		MODER: "§9[Модер] ",
+		WARDEN: "§9[Модер] ",
+		CHIEF: "§9[Гл. модер] ",
+		ADMIN: "§3§l[Гл. админ] "
+	}
+
+	name = window.location.hash.replace("#", "");
+	httpGet("https://api.vime.world/user/name/" + name, function a(j) {
+		players = JSON.parse(j);
+		player = players[0];
+		tag = "";
+		if (player.guild && player.guild.tag) tag = "§7<" + player.guild.color.replace("&", "§") + player.guild.tag + "§7> ";
+		output = tag + ranks[player.rank] + player.username + "§7: "
+		document.write('<span style="font-family: courier; font-size: 30px;">' + output + "</span>");
+	})
+
+</script>
