@@ -1,0 +1,147 @@
+body {
+  background-color: #131313;
+  color: #fff;
+  font-family: Segoe UI;
+  font-weight: lighter;
+  letter-spacing: 0.3px;
+  transition: 0.3s;
+}
+
+body.highlight {
+  background-color: #333;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+h1 {
+  font-weight: normal;
+  font-size: 200%;
+  margin: 0;
+  font-weight: lighter;
+  text-align: center;
+}
+
+#drop-screen {
+  margin-top: 20em;
+}
+#data-screen {
+  margin-top: 1em;
+}
+
+.box {
+  border: 2px dashed #666;
+  border-radius: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  transition: 0.3s;
+  margin-bottom: 20px;
+}
+
+#drop-area {
+  width: 480px;
+  text-align: center;
+}
+#witness-data {
+  width: 500px;
+}
+
+
+#drop-area.highlight {
+  border-color: #3b5;
+}
+p {
+  margin-top: 0;
+}
+#gallery {
+  margin-top: 10px;
+}
+#gallery img {
+  width: 150px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.button {
+  display: inline-block;
+  padding: 10px;
+  background: #444;
+  cursor: pointer;
+  border-radius: 5px;
+  width: -webkit-fill-available;
+  margin: 0px 20px;
+}
+.button:hover {
+  background: #666;
+}
+#fileElem {
+  display: none;
+}
+
+#chat-form {
+  display: grid;
+}
+
+.chat-line { 
+  background-color: #333;
+  cursor: text;
+  font-family: Segoe UI;
+  font-size: 20px;
+  padding: 6px;
+  border: none;
+  color: white;
+  /*letter-spacing: 1px;*/
+  transition: 0.2s;
+  border-left: 5px solid #333;
+}
+
+.color-0 {color: #000;}
+.color-1 {color: #00a;}
+.color-2 {color: #0a0;}
+.color-3 {color: #0aa;}
+.color-4 {color: #a00;}
+.color-5 {color: #a0a;}
+.color-6 {color: #fa0;}
+.color-7 {color: #aaa;}
+.color-8 {color: #555;}
+.color-9 {color: #55f;}
+.color-a {color: #5f5;}
+.color-b {color: #5ff;}
+.color-c {color: #f55;}
+.color-d {color: #f5f;}
+.color-e {color: #ff5;}
+.color-f {color: #fff;}
+.color-l {font-weight: bold;}
+
+.error {
+  background-color: #933;
+  padding-left: 8px;
+  padding-right: 8px;
+  color: #fff;
+  transition: 0.5s;
+}
+
+.chat-line:focus {
+  outline: none;
+  border-left: 5px solid #c82;
+  transition: 0.2s;
+}
+
+
+.error:before {            
+    position : absolute;
+     content : attr(tooltip);
+     opacity : 0;
+  transition: 0.4s;
+}
+
+.error:hover:before {        
+    opacity : 1;
+  background-color: #933;
+  width: 40rem;
+  transition: 0.4s;
+}

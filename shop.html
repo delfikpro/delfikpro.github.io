@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="shop.css">
+	<title>MyavkeShop - создание подставы</title>
+	<script type="text/javascript" src="vimeapi.js"></script>
+</head>
+<body>
+	<div id="global">
+		<div id="drop-screen" class="screen" hidden="true">
+			<div id="drop-area" class="box">
+	    	<form class="my-form">
+	    		<h1>Привет.</h1>
+	    		<p>Создание подставы начинается с загрузки скриншота.<br>
+	    		На скриншоте не должно быть ничего кроме фона (F1).</p>
+	    		<input type="file" id="fileElem" accept="image/*" onchange="handleFiles(this.files)">
+	    		<label class="button" for="fileElem">Загрузить скриншот</label>
+	  		</form>
+  			<div id="gallery"></div>
+			</div>
+		</div>
+		<div id="data-screen" class="screen">
+			<div id="witness-data" class="box">
+				<h1>Свидетель</h1>
+				<p>Укажите данные об отправителе жалобы.<br>
+				Жалобу лучше всего подавать от ника, совпадающего с ником форумного аккаунта.</p>
+				<form class="simple-form">
+					<input type="text" name="" placeholder="Ник игрока">
+					<input type="number" name="" placeholder="Количество коинов">
+				</form>
+			</div>	
+			<div id="chat-data" class="box">
+				<h1>Чат</h1>
+				<p>Укажите данные об отправителе жалобы.<br>
+				Жалобу лучше всего подавать от ника, совпадающего с ником форумного аккаунта.</p>
+				
+				<form class="simple-form" id="chat-form">
+					<div class="chat-line" contenteditable="true" id="line00"></div>
+					<div class="chat-line" contenteditable="true" id="line01"></div>
+					<div class="chat-line" contenteditable="true" id="line02"></div>
+					<div class="chat-line" contenteditable="true" id="line03"></div>
+					<div class="chat-line" contenteditable="true" id="line04"></div>
+					<div class="chat-line" contenteditable="true" id="line05"></div>
+					<div class="chat-line" contenteditable="true" id="line06"></div>
+					<div class="chat-line" contenteditable="true" id="line07"></div>
+					<div class="chat-line" contenteditable="true" id="line08"></div>
+					<div class="chat-line" contenteditable="true" id="line09"></div>
+					<div class="chat-line" contenteditable="true" id="line10"></div>
+					<div class="chat-line" contenteditable="true" id="line11"></div>
+					<div class="chat-line" contenteditable="true" id="line12"></div>
+					<div class="chat-line" contenteditable="true" id="line13"></div>
+					<div class="chat-line" contenteditable="true" id="line14"></div>
+					<div class="chat-line" contenteditable="true" id="line15"></div>
+					<div class="chat-line" contenteditable="true" id="line16"></div>
+					<div class="chat-line" contenteditable="true" id="line17"></div>
+					<div class="chat-line" contenteditable="true" id="line18"></div>
+					<div class="chat-line" contenteditable="true" id="line19"></div>
+					<div class="chat-line" contenteditable="true" id="line20"></div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="shop.js"></script>
+</body>
+</html>
