@@ -1,16 +1,42 @@
 ranks = {
-"PLAYER": "<span class='color-7'>",
-"VIP": "<span class='color-a'>[V] ",
-"PREMIUM": "<span class='color-b'>[P] ",
-"HOLY": "<span class='color-6'>[H] ",
-"IMMORTAL": "<span class='color-d'>[?] ",
-"BUILDER": "<span class='color-2'>[Билдер] ",
-"MAPLEAD": "<span class='color-2'>[Гл. билдер] ",
-"YOUTUBE": "<span class='color-c'>[You<span class='color-f'>Tube</span>] ",
-"DEV": "<span class='color-3'>[Dev] ",
-"ORGANIZER": "<span class='color-3'>[Организатор] ",
-"MODER": "<span class='color-9'>[Модер] ",
-"WARDEN": "<span class='color-9'>[Модер] ",
-"CHIEF": "<span class='color-9'>[Гл. модер] ",
-"ADMIN": "<span class='color-3 color-l'>[Гл. админ] "
+"PLAYER":    rank('', '7'),
+"VIP":       rank('V', 'a'),
+"PREMIUM":   rank('P', 'b'),
+"HOLY":      rank('H', '6'),
+"IMMORTAL":  rank('I', 'd'),
+"BUILDER":   rank('Билдер', '2'),
+"MAPLEAD":   rank('Гл. билдер', '2'),
+"YOUTUBE":   rank('You<span class="color-f">Tube</span>', 'c'),
+"DEV":       rank('Dev', '3'),
+"ORGANIZER": rank('Организатор', '3'),
+"MODER":     rank('Модер', '9'),
+"WARDEN":    rank('Модер', '9'),
+"CHIEF":     rank('Гл. модер', '9',         true),
+"ADMIN":     rank('Гл. админ', '3 color-l', true),
+}
+
+function rank(prefix, color, isAdmin) {
+	return {
+		color: color,
+		prefix: prefix,
+		isAdmin: isAdmin
+	}
+}
+
+
+var playerCache = [];
+
+function getVimePlayer(name, callback) {
+
+	// джаваскрипт ты классный конешно но нет, принимает числовые ники за числа и создаёт массив длины 2340942385
+	let cached = playerCache["A" + name.toLowerCase()];
+	if (cached != undefined) {
+		console.log(cached);
+		callback(cached == {} ? null : cached);
+		return;
+	}
+	$.get( "https://api.vime.world/user/name/" + name, function( data ) {
+		playerCache["A" + name.toLowerCase()] = data[0] ? data[0] : {};
+  		callback(data[0]);
+	});
 }

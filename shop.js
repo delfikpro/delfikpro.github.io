@@ -60,16 +60,6 @@ function previewFile(file) {
 }
 
 
-var playerCache = [];
-
-function getVimePlayer(name, callback) {
-	let cached = playerCache[name.toLowerCase()];
-	if (cached) callback(cached);
-	$.get( "https://api.vime.world/user/name/" + name, function( data ) {
-		playerCache[name.toLowerCase()] = data[0];
-  		callback(data[0]);
-	});
-}
 
 
 messages = [];
@@ -81,13 +71,35 @@ $('.chat-line').on('focus', function(e) {
 });
 
 $('.chat-line').on('blur', function(e) {
+	let text = e.target.innerText;
+	let html = e.target.innerHTML;
 	let t = e.target.innerText.replace('\n', '');
 	messages[e.target.id] = t;
-	e.target.innerHTML = t ? parseMessage(e.target.innerText, e.target) : ""; 
+	if (t) {
+		let h = parseMessage(t.replace(/</g, "&lt;").replace(/>/g, "&gt;"), e.target);
+		if (h) e.target.innerHTML = h;
+	}
+
+
+	console.log("innerText: " + text + " -> " + e.target.innerText);
+	console.log("innerHTML: " + html + " -> " + e.target.innerHTML);
+
 });
+
 
 $('.chat-line').on('keypress', function(e) {
 	if (e.charCode == 13) {
+		e.preventDefault();
+		$(this).next().focus();
+	}
+});
+
+$('.chat-line').on('keydown', function(e) {
+	if (e.key == "ArrowUp") {
+		e.preventDefault();
+		$(this).prev().focus();
+	}
+	if (e.key == "ArrowDown") {
 		e.preventDefault();
 		$(this).next().focus();
 	}
@@ -98,15 +110,15 @@ function parseMessage(text, dst) {
 	if (text.includes(': ')) {
 		let head = text.substring(0, text.indexOf(': '));
 		let name = head;
-		let prefix = "I";
-		let message = text.substring(text.indexOf(': ') + 2);
+		let prefix = "";
+		let message = parseColors(text.substring(text.indexOf(': ') + 2));
 		if (head.includes(' ')) {
 			let split = head.split(" ");
 			prefix = split[0].replace('[', '').replace(']', '');
 			name = split[1];
 		}
 		if (!/^[a-zA-Z0-9_]{3,16}$/.test(name)) {
-			errors[dst.id] = "В нике " + name + " содержатся некорректные символы.";
+			errors[dst.id] = "В нике содержатся некорректные символы.";
 			return "<span class='error' tooltip='" + errors[dst.id] + "'>" + name + "</span><span class='color-7'>: </span>" + message;
 		} else {
 			errors[dst.id] = undefined;
@@ -117,11 +129,27 @@ function parseMessage(text, dst) {
 			} else {
 				errors[dst.id] = undefined;
 			}
-			let guildTag = player && player.guild && player.guild.tag ? "<<span class='color-" + player.guild.color.substring(1) + "'>" + player.guild.tag + "</span>> " : "";
-			let displayName = player ? guildTag + ranks[player.rank].replace('?', prefix) + player.username : 
-							"<span class='error' tooltip='" + errors[dst.id] + "'>" + name + "</span>";
-			dst.innerHTML = "<span class='color-7'>" + displayName + "</span>: </span>" + message;
+			let displayName;
+			let messageColor = "f'>";
+			if (player) {
+				let guildTag = player.guild && player.guild.tag ? "<<span class='color-" + player.guild.color.substring(1) + "'>" + player.guild.tag + "</span>> " : "";
+				let rank = ranks[player.rank];
+				let playerPrefix = "<span class='color-" + rank.color + "'>" + (rank.prefix ? "[" + (prefix ? prefix : rank.prefix) + "] " : "");
+				displayName = guildTag + playerPrefix + player.username;
+				if (rank.isAdmin) messageColor = "a'>";
+			} else {
+				displayName = "<span class='error' tooltip='" + errors[dst.id] + "'>" + name + "</span>";
+			}
+							
+			dst.innerHTML = "<span class='color-7'>" + displayName + "</span>: </span>" + "<span class='color-" + messageColor + message + "</span>";
 		});
+		return null;
 	}
 	return text;
+}
+
+
+function parseColors(string) {
+	if (!string.includes('&')) return string;
+	return "<span>" + string.replace(/&([0-9a-f])/g, "</span><span class='color-$1'>") + "</span>";
 }
