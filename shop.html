@@ -4,13 +4,33 @@
 	<link rel="stylesheet" type="text/css" href="shop.css">
 	<title>MyavkeShop - создание подставы</title>
 	<script type="text/javascript" src="vimeapi.js"></script>
+	<script src="https://unpkg.com/css-doodle@0.7.3/css-doodle.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 <body>
+	<css-doodle style="position: absolute; z-index: -999; width: 100%; overflow-y: hidden; overflow-x:hidden;">
+	  :doodle {
+	    @grid: 7 / 100vmax;
+	    background: #0a0c27;
+	  }
+	  @shape: hexagon 5;
+	  background: radial-gradient(hsla(
+	    calc(360 - @i() * 4), 70%, 68%, @r(.4)
+	  ), #0000);
+	  transform:
+	    scale(@r(.2, 1.5))
+	    translate(@m2(@r(±50%)))
+	    rotate(@rand(200deg));
+	</css-doodle>
+
 	<div id="global">
 		<div id="data-screen" class="screen">
 			<div class="column small">
 
-				<div class="drop-limit title">Фон!Нужен скриншот с F1!Поверх него<br>мы будем рисовать</div>
+				<div class="drop-limit flex">
+					<h1>Фон</h1>
+					<div class="empty">Картинка для подставы - скриншот с нажатым F1</div>
+				</div>
 				<div id="drop-area" class="box drop-limit">
 			    	<form class="my-form">
 			    		<input type="file" id="fileElem" accept="image/*" onchange="handleFiles(this.files)">
@@ -21,7 +41,10 @@
 
 
 
-				<div class="drop-limit title">Свидетель!Кто подаёт<br>жалобу?!Укажите<br>информацию</div>
+				<div class="drop-limit flex">
+					<h1>Свидетель</h1>
+					<div class="empty">Данные подающего жалобу (создателя подставы)</div>
+				</div>
 				<div id="witness-data" class="witness-limit box">
 					<div class="flex">
 						<div style='margin-right: 20px;'>
@@ -40,7 +63,11 @@
 			</div>
 			
 			<div class="column big">
-				<div class="drop-limit title">Чат!Нужно 20 строк для<br>идеальной подставы!Включай творческое мышление</div>
+
+				<div class="drop-limit flex">
+					<h1>Чат</h1>
+					<div class="empty">Сообщения в чате от крутых пацанов</div>
+				</div>
 				<div id="chat-data" class="box">
 					
 					<form class="simple-form" id="chat-form">
@@ -53,7 +80,6 @@
 		</div>
 	</div>
 
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script type="text/javascript" src="shop.js"></script>
 </body>
 </html>

@@ -60,13 +60,13 @@ function previewFile(file) {
 }
 
 
-var titles = document.getElementsByClassName('title');
-for (var i = 0; i < titles.length; i++) {
-	var title = titles[i];
-	var split = $(title).html().split("!");
-	$(title).html('<div class="flex bg"><div class="empty">' + split[1] + '</div><div class="title1"><div class="title2"><h1>' + 
-		split[0] + '</h1></div></div><div class="empty">' + split[2] + '</div><div>');
-}
+// var titles = document.getElementsByClassName('title');
+// for (var i = 0; i < titles.length; i++) {
+// 	var title = titles[i];
+// 	var split = $(title).html().split("!");
+// 	$(title).html('<div class="flex"><h1>' + 
+// 		split[0] + '</h1><div class="empty">' + split[1] + '</div><div>');
+// }
 
 
 
@@ -105,9 +105,20 @@ function registerLine(selector) {
 	selector.on('focus', function(e) {
 		let msg = messages[e.target.id];
 		e.target.innerText = msg ? msg : "";
+		setCaretPosition(e.target);
 	});
 }
-
+function setCaretPosition(elem) {
+	var e = elem.childNodes[0];
+	if (!e) e = elem;
+	var el = document.getElementById("editable");
+	var range = document.createRange();
+	var sel = window.getSelection();
+	range.setStart(e, elem.innerText.length);
+	range.collapse(true);
+	sel.removeAllRanges();
+	sel.addRange(range);
+}
 function blur(target) {
 	let text = target.innerText;
 	let html = target.innerHTML;
@@ -125,6 +136,7 @@ $('#defaultLine2')[0].innerText = "MyavkeShop: Генерировать подс
 blur($('#defaultLine2')[0]);
 
 var causername = $('#causer-name').html();
+blur($('#causer-name')[0]);
 getVimePlayer(causername, updateCauser);
 function updateCauser(player) {
 	if (player) {
