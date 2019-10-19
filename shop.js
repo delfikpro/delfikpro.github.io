@@ -60,53 +60,123 @@ function previewFile(file) {
 }
 
 
+var titles = document.getElementsByClassName('title');
+for (var i = 0; i < titles.length; i++) {
+	var title = titles[i];
+	var split = $(title).html().split("!");
+	$(title).html('<div class="flex bg"><div class="empty">' + split[1] + '</div><div class="title1"><div class="title2"><h1>' + 
+		split[0] + '</h1></div></div><div class="empty">' + split[2] + '</div><div>');
+}
+
+
 
 
 messages = [];
 errors = [];
 
-$('.chat-line').on('focus', function(e) {
-	let msg = messages[e.target.id];
-	e.target.innerText = msg ? msg : "";
-});
+registerLine($('.chat-line'));
 
-$('.chat-line').on('blur', function(e) {
-	let text = e.target.innerText;
-	let html = e.target.innerHTML;
-	let t = e.target.innerText.replace('\n', '');
-	messages[e.target.id] = t;
+function registerLine(selector) {
+	selector.on('keypress', function(e) {
+		if (e.charCode == 13) {
+			e.preventDefault();
+			addLineAfter($(this)[0]);
+			$(this).next().focus();
+
+		}
+	});
+	selector.not(".special").on('keydown', function(e) {
+		if (e.key == "ArrowUp") {
+			e.preventDefault();
+			$(this).prev().focus();
+		}
+		if (e.key == "ArrowDown") {
+			e.preventDefault();
+			$(this).next().focus();
+		}
+	});
+	selector.on('blur', function(e) {
+		blur(e.target);
+
+		// console.log("innerText: " + text + " -> " + e.target.innerText);
+		// console.log("innerHTML: " + html + " -> " + e.target.innerHTML);
+
+	});
+	selector.on('focus', function(e) {
+		let msg = messages[e.target.id];
+		e.target.innerText = msg ? msg : "";
+	});
+}
+
+function blur(target) {
+	let text = target.innerText;
+	let html = target.innerHTML;
+	let t = target.innerText.replace('\n', '');
+	messages[target.id] = t;
 	if (t) {
-		let h = parseMessage(t.replace(/</g, "&lt;").replace(/>/g, "&gt;"), e.target);
-		if (h) e.target.innerHTML = h;
+		let h = parseMessage(t.replace(/</g, "&lt;").replace(/>/g, "&gt;"), target);
+		if (h) target.innerHTML = h;
 	}
+}
 
+$('#defaultLine1')[0].innerText = "SmaIK: Что мы сегодня будем делать?";
+blur($('#defaultLine1')[0]);
+$('#defaultLine2')[0].innerText = "MyavkeShop: Генерировать подставы!";
+blur($('#defaultLine2')[0]);
 
-	console.log("innerText: " + text + " -> " + e.target.innerText);
-	console.log("innerHTML: " + html + " -> " + e.target.innerHTML);
-
-});
-
-
-$('.chat-line').on('keypress', function(e) {
-	if (e.charCode == 13) {
-		e.preventDefault();
-		$(this).next().focus();
+var causername = $('#causer-name').html();
+getVimePlayer(causername, updateCauser);
+function updateCauser(player) {
+	if (player) {
+		var name = player.username;
+		$('#head-first')[0].src="https://skin.vimeworld.ru/head/" + name + ".png";
+		$('#head-second')[0].style.backgroundImage='url("https://skin.vimeworld.ru/raw/skin/' + name + '.png';
+		$('#head-second')[0].style.background=undefined;
+		$('#head-question')[0].hidden = true;
+	} else {
+		$('#head-first')[0].src=undefined;
+		$('#head-second')[0].style.background='#111';
+		$('#head-question')[0].hidden = false;
 	}
-});
+}
 
-$('.chat-line').on('keydown', function(e) {
-	if (e.key == "ArrowUp") {
-		e.preventDefault();
-		$(this).prev().focus();
-	}
-	if (e.key == "ArrowDown") {
-		e.preventDefault();
-		$(this).next().focus();
-	}
-});
+function addLineAfter(node) {
+	if (node.classList.contains("special")) return;
+	var newLine = document.createElement('div');
+	newLine.contentEditable = true;
+	newLine.classList.toggle('chat-line');
+	newLine.id = Math.random();
+	console.log(node);
+	node.after(newLine);
+	registerLine($(newLine));
+}
 
 
 function parseMessage(text, dst) {
+	if (dst.classList.contains("special")) {
+		let prefix = "";
+		getVimePlayer(text, function(player) {
+			if (!player) {
+				errors[dst.id] = "Не найден";
+			} else {
+				errors[dst.id] = undefined;
+			}
+			let displayName;
+			if (player) {
+				let guildTag = player.guild && player.guild.tag ? "<<span class='color-" + player.guild.color.substring(1) + "'>" + player.guild.tag + "</span>> " : "";
+				let rank = ranks[player.rank];
+				let playerPrefix = "<span class='color-" + rank.color + "'>" + (rank.prefix ? "[" + (prefix ? prefix : rank.prefix) + "] " : "");
+				displayName = guildTag + playerPrefix + player.username;
+			} else {
+				displayName = "<span class='error' tooltip='" + errors[dst.id] + "'>" + text + "</span>";
+			}
+			if (errors[dst.id]) dst.classList.add("err");
+			else dst.classList.remove("err");
+			dst.innerHTML = "<span class='color-7'>" + displayName + "</span></span>";
+			updateCauser(player);
+		});
+		return;
+	}
 	if (text.includes(': ')) {
 		let head = text.substring(0, text.indexOf(': '));
 		let name = head;
@@ -140,7 +210,8 @@ function parseMessage(text, dst) {
 			} else {
 				displayName = "<span class='error' tooltip='" + errors[dst.id] + "'>" + name + "</span>";
 			}
-							
+			if (errors[dst.id]) dst.classList.add("err");
+			else dst.classList.remove("err");
 			dst.innerHTML = "<span class='color-7'>" + displayName + "</span>: </span>" + "<span class='color-" + messageColor + message + "</span>";
 		});
 		return null;

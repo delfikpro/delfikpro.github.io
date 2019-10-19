@@ -1,5 +1,9 @@
+:root {
+	--box: #231C55;
+}
+
 body {
-  background-color: #131313;
+  background-color: #1B123E;
   color: #fff;
   font-family: Segoe UI;
   font-weight: lighter;
@@ -7,9 +11,6 @@ body {
   transition: 0.3s;
 }
 
-body.highlight {
-  background-color: #333;
-}
 
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
@@ -25,6 +26,29 @@ h1 {
   text-align: center;
 }
 
+.title1 {
+    background-color: var(--box);
+}
+.title2 {
+	background-color: #1B123E;
+    border-radius: 0px 0px 20px 20px;
+    padding: 0px 16px 8px 16px;
+}
+
+.empty {
+	padding-top: 10px;
+	width: -webkit-fill-available;
+    background-color: var(--box);
+    border-radius: 20px 20px 0px 0px;
+}
+
+.flex {
+	display: flex;
+}
+.bg {
+    background-color: #1B123E;
+}
+
 #drop-screen {
   margin-top: 20em;
 }
@@ -33,21 +57,26 @@ h1 {
 }
 
 .box {
-  border: 2px dashed #666;
-  border-radius: 20px;
+  /*border: 2px dashed #666;*/
+  border-radius: 0px 0px 20px 20px;
   margin-left: auto;
   margin-right: auto;
   padding: 20px;
   transition: 0.3s;
   margin-bottom: 20px;
+
+  background-color: var(--box);
 }
 
 #drop-area {
-  width: 480px;
-  text-align: center;
+	margin-left: auto;
+	margin-right: auto;
 }
-#witness-data {
-  width: 500px;
+.drop-limit {
+	margin-left: auto;
+	margin-right: auto;
+
+	text-align: center;
 }
 
 
@@ -67,16 +96,31 @@ p {
   vertical-align: middle;
 }
 .button {
-  display: inline-block;
-  padding: 10px;
-  background: #444;
-  cursor: pointer;
-  border-radius: 5px;
-  width: -webkit-fill-available;
-  margin: 0px 20px;
+	font-size: 200%;
+	font-weight: lighter;
+	color: #bfa6e9;
+	vertical-align: middle;
+	display: table-cell;
+	padding: 10px;
+	border: 1px dashed #956CDB;
+	background: none;
+	cursor: pointer;
+	border-radius: 5px;
+	width: 1200px;
+	height: 5em;
+	margin: 0px 20px;
+	transition: 0.5s;
+    animation: glowing 4000ms infinite;
+}
+
+@keyframes glowing {
+  0%   { box-shadow: 0 0 3px #7756af; }
+  40%  { box-shadow: 0 0 20px #b498e5; }
+  80%  { box-shadow: 0 0 3px #7756af; }
+  100% { box-shadow: 0 0 3px #7756af; }
 }
 .button:hover {
-  background: #666;
+  background: #a57CeB;
 }
 #fileElem {
   display: none;
@@ -84,20 +128,52 @@ p {
 
 #chat-form {
   display: grid;
+  background-color: #1B123E;
+  padding: 5px;
 }
 
+
 .chat-line { 
-  background-color: #333;
+  background-color: #1B123E;
   cursor: text;
   font-family: Segoe UI;
   font-size: 20px;
   font-weight: normal;
-  padding: 6px;
+  padding: 0px 6px;
   border: none;
   color: white;
   /*letter-spacing: 1px;*/
   transition: 0.2s;
   border-left: 5px solid #333;
+}
+
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  margin: auto 1%;
+}
+
+.small {
+	width: 35%
+}
+.big {
+	width: 60%
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 1200px) {
+  .column {
+    width: 100%;
+    margin: 0;
+  }
 }
 
 .color-0 {color: #000;}
@@ -126,6 +202,12 @@ p {
   transition: 0.5s;
 }
 
+.err {
+	font-weight: lighter;
+	border-color: #c55;
+	border-left-style: dotted;
+}
+
 .chat-line:focus {
   outline: none;
   border-left: 5px solid #c82;
@@ -145,4 +227,36 @@ p {
   background-color: #933;
   width: 40rem;
   transition: 0.4s;
+}
+
+.profile-avatar-img {
+    width: 8rem;
+    height: 8rem;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.profile-question {
+	font-size: 96px;
+	font-weight: bolder;
+	position: absolute;
+	vertical-align: center;
+	line-height: 0;
+	align-content: center;
+	align-items: center;
+	text-align: center;
+	transform: translateX(45px) translateY(-75px);
+}
+
+@media (min-width: 768px) {
+	.profile-second-layer {
+		background-position: -40px -8px;
+		position: absolute;
+		width: 8px;
+		height: 8px;
+		image-rendering: -moz-crisp-edges;
+		image-rendering: -webkit-optimize-contrast;
+		image-rendering: pixelated;
+		transform: translateX(60px) translateY(-72px) scale(18);
+	}
 }

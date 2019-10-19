@@ -31,12 +31,11 @@ function getVimePlayer(name, callback) {
 	// джаваскрипт ты классный конешно но нет, принимает числовые ники за числа и создаёт массив длины 2340942385
 	let cached = playerCache["A" + name.toLowerCase()];
 	if (cached != undefined) {
-		console.log(cached);
-		callback(cached == {} ? null : cached);
+		callback(cached == "NOT_FOUND" ? undefined : cached);
 		return;
 	}
 	$.get( "https://api.vime.world/user/name/" + name, function( data ) {
-		playerCache["A" + name.toLowerCase()] = data[0] ? data[0] : {};
+		playerCache["A" + name.toLowerCase()] = data[0] ? data[0] : "NOT_FOUND";
   		callback(data[0]);
 	});
 }
