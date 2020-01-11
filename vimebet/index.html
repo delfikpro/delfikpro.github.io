@@ -1,0 +1,108 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="vimeskin.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+	<div class="header">
+		<span id="auth-vimetop">Авторизация через VimeTop</span>
+		<div class="auth-form" id="auth-vimetop-form">
+			<input type="text" id="auth-vimetop-input">
+			<span> > </span>
+		</div>
+		<br>
+		<span id="auth-token">Авторизация через токен API</span>
+		<div class="auth-form" id="auth-token-form">
+			<input type="text" id="auth-token-input">
+			<span> > </span>
+		</div>
+	</div>
+	<div class="content">
+
+		<table class="table">
+			<tr>
+			  <td class="team-square" id="team-square-body">
+			  	<h1 id="team-square-name">LMAO</h1>
+			  	<!-- thx 2 VimeTop --> 
+
+			  </td>
+			  <td class="global">
+			  	<div class="black">
+			  		До начала игры
+			  		<h1>
+			  			<span id="timer-h">00</span><span class="separator" id="timer-separator">:</span><span id="timer-m">00</span><span class="separator">:</span><span id="timer-s">00</span>
+			  		</h1>
+			  	</div>
+			  	Общий фонд: <b>10504</b>
+			  </td>
+			  <td class="team-circle" id="team-circle-body">
+			  	<h1 id="team-circle-name">Olympians</h1>
+			  </td>
+
+			</tr>
+		</table>
+		<div class="progress-bar">
+	  		<div class="progress-bar-fill" style="width:75%"></div>
+		</div>
+
+		<table class="table">
+			<tr>
+			  <td class="team-square">
+
+			  	<div class="data">
+				  	<div class="info" id="team-square-coef">
+					  	<h2 id="team-square-coef-value">x2.00</h2>
+					  	<span class="sup">Коэффициент</span>
+				  	</div>
+				  	<div class="info" id="team-square-fund">
+				  		<h2 id="team-square-fund-value">0</h2>
+				  		<span class="sup">Фонд</span>
+				  	</div>
+				  	<div class="info" id="team-square-bet" hidden="true">
+				  		<h2 id="team-square-bet-value">0</h2>
+				  		<span class="sup">Ставка</span>
+				  	</div>
+				  	<div class="info" id="team-square-win" hidden="true">
+				  		<h2 id="team-square-win-value">0</h2>
+				  		<span class="sup">Выигрыш</span>
+				  	</div>
+			  	</div>
+			  </td>
+			  <td class="global">
+			  </td>
+			  <td class="team-circle">
+
+			  	<div class="data">
+				  	<div class="info" id="team-circle-coef">
+					  	<h2 id="team-circle-coef-value">x2.00</h2>
+					  	<span class="sup">Коэффициент</span>
+				  	</div>
+				  	<div class="info" id="team-circle-fund">
+				  		<h2 id="team-circle-fund-value">0</h2>
+				  		<span class="sup">Фонд</span>
+				  	</div>
+				  	<div class="info" id="team-circle-bet" hidden="true">
+				  		<h2 id="team-circle-bet-value">0</h2>
+				  		<span class="sup">Ставка</span>
+				  	</div>
+				  	<div class="info" id="team-circle-win" hidden="true">
+				  		<h2 id="team-circle-win-value">0</h2>
+				  		<span class="sup">Выигрыш</span>
+				  	</div>
+			  	</div>
+			  </td>
+			</tr>
+		</table>
+
+	</div>
+
+
+
+	<script src="vimeskin.js"></script>
+	<script src="index.js"></script>
+
+</body>
+</html>

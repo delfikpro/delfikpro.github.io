@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+:root {
+  --square: #ee7777;
+  --circle: #ee77ee;
+}
+
+body {
+	min-width: 1200px;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	background-color: #131313;
+	color: #eee;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.progress-bar {
+	background-color: var(--circle);
+	height: 24px;
+	border-radius: 10px;
+}
+
+.progress-bar-fill {
+	background-color: var(--square);
+	border-right: 5px double #fff;
+	height: 24px;
+	border-radius: 10px 0 0 10px;
+	color: white;
+	font-weight: bold;
+	padding-left: 10px;
+}
+
+h1 {
+	font-size: 300%;
+	margin: 0;
+}
+
+h2 {
+	margin: 0;
+	font-size: 200%;
+	text-align: center;
+}
+
+
+.black {
+	font-weight: 0%;
+	font-size: 75%;
+	background-color: #222;
+	color: #fff;
+	padding: 10px;
+	padding-bottom: 30px;
+	margin-bottom: 40px;
+	border-radius: 10px;
+	line-height: 40px;
+}
+
+
+.black > h1 {
+	padding-top: 0;
+	font-size: 300%;
+}
+
+.content {
+	margin: 10% auto;
+	width: 1200px;
+}
+
+.table {
+	width: 1200px;
+	padding: 0;
+	min-width: 1200px;
+}
+
+.global {
+	width: 30%;
+	font-size: 160%;
+	text-align: center;
+}
+
+td {
+	width: 35%;
+	padding: 20px;
+	padding-top: 5px;
+	padding-bottom: 10px;
+}
+
+h2 {
+	color: #fff;
+	font-weight: lighter;
+}
+
+.info {
+	color: #aaa;
+	line-height: 24px;
+	margin: 10px;
+	margin-bottom: 0;
+	text-align: center;
+}
+
+.sup {
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.team-square > h1 {
+	color: var(--square);
+}
+
+.team-square, .team-circle {
+	vertical-align: bottom;
+}
+
+.team-circle > h1 {
+	color: var(--circle);
+}
+
+.data {
+	display: flex;
+}
+
+.team-circle {
+	text-align: right;
+	margin: auto;
+}
+
+.team-circle > .data {
+	flex-direction: row-reverse;
+}
+
+.separator {
+	font-weight: lighter;
+	color: #999;
+}
+
+.header {
+	margin: 10px;
+	text-align: right;
+	color: #888;
+}
+
+.header > span {
+	color: #888;
+	text-decoration: none;
+	transition: 0.15s;
+}
+.header > span:hover {
+	color: #8a8;
+	font-weight: 900;
+	text-decoration: none;
+}
+
+input {
+	border: none;
+	border-radius: 5px;
+	background-color: #222;
+	height: 32px;
+	width: 200px;
+	color: #fff;
+	font-family: 'Lucida Console';
+	padding: 5px;
+	display: inline-block;
+	transition: 0.5s;
+}
+
+.auth-form {
+	border-radius: 7px;
+	margin-bottom: 5px;
+	margin-left: 10px;
+	display: inline-block;
+	padding: 0;
+	width: 230px;
+	text-align: left;
+	background-color: #3a3;
+	color: #fff;
+	font-weight: 900;
+}
+.auth-form > span {
+	position: relative;
+	top: 2px;
+	left: 5px;
+}
