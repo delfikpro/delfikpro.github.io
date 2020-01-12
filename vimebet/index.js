@@ -1,5 +1,5 @@
 
-ADDRESS = "http://s1.dme-ihr.implario.cc";
+ADDRESS = "https://implario.cc";
 
 // Добавление ведущих нулей (паддинг)
 Number.prototype.pad = function(size) {
@@ -82,10 +82,15 @@ $("#auth-vimetop-confirm").click(function() {
 	if (!code) return;
 	$.ajax({
 		url: ADDRESS + "/auth",
-		type: 'GET',
+		type: 'POST',
 		data: {
 			vimetop: code,
 		},
 		success: console.log
 	});
+	$.ajax({
+		url: ADDRESS + "/user",
+		type: 'GET',
+		success: console.log
+	})
 });
