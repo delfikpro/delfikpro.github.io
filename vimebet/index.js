@@ -1,4 +1,6 @@
 
+ADDRESS = "http://s1.dme-ihr.implario.cc";
+
 // Добавление ведущих нулей (паддинг)
 Number.prototype.pad = function(size) {
     var s = String(this);
@@ -69,8 +71,21 @@ setInterval((h, m, s, sep) => {
 
 // });
 
-
+vimetopClicked = false;
 $("#auth-vimetop").click(function() {
-	console.log("123");
-	window.open("https://vimetop.ru/auth?app_id=4&key=3ftgyuhf2nj");
-})
+	if (!vimetopClicked) window.open("https://vimetop.ru/auth?app_id=4&key=3ftgyuhf2nj");
+	vimetopClicked = true;
+});
+
+$("#auth-vimetop-confirm").click(function() {
+	let code = $("#auth-vimetop-input").val();
+	if (!code) return;
+	$.ajax({
+		url: ADDRESS + "/auth",
+		type: 'GET',
+		data: {
+			vimetop: code,
+		},
+		success: console.log
+	});
+});
