@@ -1,28 +1,123 @@
-<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Зарегистрированых игроков</title>
-		<link rel="stylesheet" href="odometer-theme-minimal.css" />
-		<script src="odometer.js"></script>
-		<script type="text/javascript" src="vimeworld.js"></script>
-		<script type="text/javascript">refreshData(); setInterval(refreshData, 10000);</script>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="css/style.css">
-		<link rel="icon" href="favicon.ico" type="image/x-icon">
-		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-	</head>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="vimeskin.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
 
-	<body>
-		<div class="container">
-			<div class="titletext odometer odometer-theme-minimal" id="playercount">4000000</div><br>
-			<span id="pluralshit">Игроков зарегистрировано</span> на <a href="http://vimeworld.ru">VimeWorld</a>
-			<hr>
+<body>
+
+	<div class="header">
+		<div id="auth">
+			<div id="auth-vimetop">
+				<span>Авторизация через VimeTop</span>
+				<div class="auth-form" id="auth-vimetop-form">
+					<form action="http://localhost/auth" method="post">
+						<input type="text" id="auth-vimetop-input" name="vimetop" placeholder="Введите код">
+						<input type="submit">
+						<div id="auth-vimetop-confirm"><span> ✓ </span></div>
+					</form>
+				</div>
+			</div>
+			<span id="auth-token">Авторизация через токен API</span>
+			<div class="auth-form" id="auth-token-form">
+				<input type="text" id="auth-token-input" placeholder="Введите токен">
+				<div id="auth-token-confirm"><span> ✓ </span></div>
+			</div>
+		</div>
+		
+		<div class="info">
+		  	<h2 id="user">DelfikPro</h2>
+		  	<span class="sup">Ваш ник</span>
+		</div>
+		<div class="info">
+		  	<h2 id="balance">150</h2>
+		  	<span class="sup">Баланс</span>
+		</div>
+	</div>
+	<div class="content">
+
+		<table class="table">
+			<tr>
+			  <td class="team-square" id="team-square-body">
+			  	<h1 id="team-square-name">LMAO</h1>
+			  	<!-- thx 2 VimeTop --> 
+
+			  </td>
+			  <td class="global">
+			  	<div class="black">
+			  		До начала игры
+			  		<h1>
+			  			<span id="timer-h">00</span><span class="separator" id="timer-separator">:</span><span id="timer-m">00</span><span class="separator">:</span><span id="timer-s">00</span>
+			  		</h1>
+			  	</div>
+			  	Общий фонд: <b>10504</b>
+			  </td>
+			  <td class="team-circle" id="team-circle-body">
+			  	<h1 id="team-circle-name">Olympians</h1>
+			  </td>
+
+			</tr>
+		</table>
+		<div class="progress-bar">
+	  		<div class="progress-bar-fill" style="width:75%"></div>
 		</div>
 
-	<!-- Прелоадер -->	
-	<style type="text/css">#hellopreloader>p{display:none;}#hellopreloader_preload{display: block;position: fixed;z-index: 99999;top: 0;left: 0;width: 100%;height: 100%;min-width: 1000px;background: #1a1a1a url(http://hello-site.ru//main/images/preloads/oval.svg) center center no-repeat;background-size:41px;}</style>
-	<div id="hellopreloader"><div id="hellopreloader_preload"></div></div>
-	<script src="js/preloader.js"></script>
-	</body>
+		<table class="table">
+			<tr>
+			  <td class="team-square">
+
+			  	<div class="data">
+				  	<div class="info" id="team-square-coef">
+					  	<h2 id="team-square-coef-value">x2.00</h2>
+					  	<span class="sup">Коэффициент</span>
+				  	</div>
+				  	<div class="info" id="team-square-fund">
+				  		<h2 id="team-square-fund-value">0</h2>
+				  		<span class="sup">Фонд</span>
+				  	</div>
+				  	<div class="info" id="team-square-bet" hidden="true">
+				  		<h2 id="team-square-bet-value">0</h2>
+				  		<span class="sup">Ставка</span>
+				  	</div>
+				  	<div class="info" id="team-square-win" hidden="true">
+				  		<h2 id="team-square-win-value">0</h2>
+				  		<span class="sup">Выигрыш</span>
+				  	</div>
+			  	</div>
+			  </td>
+			  <td class="global">
+			  </td>
+			  <td class="team-circle">
+
+			  	<div class="data">
+				  	<div class="info" id="team-circle-coef">
+					  	<h2 id="team-circle-coef-value">x2.00</h2>
+					  	<span class="sup">Коэффициент</span>
+				  	</div>
+				  	<div class="info" id="team-circle-fund">
+				  		<h2 id="team-circle-fund-value">0</h2>
+				  		<span class="sup">Фонд</span>
+				  	</div>
+				  	<div class="info" id="team-circle-bet" hidden="true">
+				  		<h2 id="team-circle-bet-value">0</h2>
+				  		<span class="sup">Ставка</span>
+				  	</div>
+				  	<div class="info" id="team-circle-win" hidden="true">
+				  		<h2 id="team-circle-win-value">0</h2>
+				  		<span class="sup">Выигрыш</span>
+				  	</div>
+			  	</div>
+			  </td>
+			</tr>
+		</table>
+
+	</div>
+
+
+
+	<script src="vimeskin.js"></script>
+	<script src="index.js"></script>
+
+</body>
 </html>
