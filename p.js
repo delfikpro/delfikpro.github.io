@@ -16,5 +16,6 @@ for (var i = 0; i <= form.code.value.length; i++) {
 		
 
 	}
+	// disable
 
 }
