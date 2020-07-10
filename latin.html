@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Латинизатор №1 в галактике</title>
+</head>
+<body>
+	<textarea id="text"></textarea>
+	<script type="text/javascript">
+		let t = document.getElementById("text");
+		t.onchange = t.onkeyup = function(e) {
+			t.value = t.value
+				.replace(/а/gi, 'a')
+				.replace(/б/gi, '6')
+				.replace(/в/gi, 'B')
+				.replace(/г/gi, 'r')
+				.replace(/д/gi, 'g')
+				.replace(/е/gi, 'e')
+				.replace(/ё/gi, 'e')
+				.replace(/ж/gi, '>|<')
+				.replace(/з/gi, '3')
+				.replace(/и/gi, 'u')
+				.replace(/й/gi, 'u')
+				.replace(/к/gi, 'K')
+				.replace(/л/gi, '/\\')
+				.replace(/м/gi, 'M')
+				.replace(/н/gi, 'H')
+				.replace(/о/gi, 'O')
+				.replace(/п/gi, 'n')
+				.replace(/р/gi, 'p')
+				.replace(/с/gi, 'c')
+				.replace(/т/gi, 'T')
+				.replace(/у/gi, 'y')
+				.replace(/ф/gi, '<|>')
+				.replace(/х/gi, 'x')
+				.replace(/ц/gi, 'u,')
+				.replace(/ч/gi, '4')
+				.replace(/ш/gi, 'LLI')
+				.replace(/щ/gi, 'LLI,')
+				.replace(/ъ/gi, '^b')
+				.replace(/ы/gi, 'bl')
+				.replace(/ь/gi, 'b')
+				.replace(/э/gi, '3')
+				.replace(/ю/gi, 'I-O')
+				.replace(/я/gi, '9I')
+		}
+	</script>
+</body>
+</html>
