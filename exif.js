@@ -1,3 +1,3 @@
-var remove_exif = {exif};
-remove_exif("PNG", {});
+var remove_exif = {};
+remove_exif("PNG", {exif});
 return response;
