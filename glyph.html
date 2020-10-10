@@ -41,8 +41,8 @@
     function update() {
 
 
-    test.replaceChildren();
-    err.replaceChildren();
+    test.innerHTML = '';
+    err.innerHTML = '';
     let cp = $("#in")[0].value.codePointAt(0).toString(16);
     $.ajax({
         type: 'GET',
