@@ -30,7 +30,7 @@
 
 		function refreshData() {
 			startRefreshing = Date.now();
-			getPlayersCount(3, 125000);
+			getPlayersCount(4, 6250000);
 			
 		}
 		function httpGet(theUrl, callback) {
