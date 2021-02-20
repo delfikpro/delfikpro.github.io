@@ -1,0 +1,192 @@
+<html>
+<head>
+	<title>Cristalix UI Engine cheat sheet</title>
+	<style type="text/css">
+		body {
+			margin: 10px auto;
+			width: 100%;
+			font-family: sans-serif;
+			text-align: center;
+		}
+		table {
+			margin: auto;
+		}
+		input {
+			width: 300px;
+		}
+		#parent {
+			width: 500px;
+			height: 340px;
+			background-color: #222;
+			margin: 60px auto;
+			text-align: center;
+			color: white;
+			/*padding-top: 10px;*/
+		}
+		.offset {
+			position: relative;
+		}
+		#child1 {
+			width: 4px;
+			height: 4px;
+			background-color: #5f5;
+			border-radius: 50px;
+			transform: translateX(-50%) translateY(-50%);
+		}
+		#child {
+			width: 100px;
+			height: 50px;
+			resize: both;
+  			overflow: hidden;
+
+			/*text-align: center;*/
+			background-color: #f558;
+			/*padding-top: 10px;*/
+		}
+		.a {
+			position: absolute;
+			padding-top: 10px;
+			text-align: center;
+			margin: auto;
+			transform: translateX(-50%);
+		}
+		td {
+			min-width: 100px;
+			text-align: center;
+		}
+		
+	</style>
+</head>
+<body>
+	<table>
+	<tr class="slidecontainer">
+	<td>Origin X</td>
+	  <td><input type="range" min="0" max="1" value="0.5" class="slider" id="originx" step="0.01"></td>
+	  <td><span id="originxv"></span></td>
+	</tr>
+	<tr class="slidecontainer">
+		<td>Origin Y</td>
+	  <td><input type="range" min="0" max="1" value="0.5" class="slider" id="originy" step="0.01"></td>
+	  <td><span id="originyv"></span></td>
+	</tr>
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+	<tr class="slidecontainer">
+		<td>Align X</td>
+	  <td><input type="range" min="0" max="1" value="0.5" class="slider" id="alignx" step="0.01"></td>
+	  <td><span id="alignxv"></span></td>
+	</tr>
+	<tr class="slidecontainer">
+		<td>Align Y</td>
+	  <td><input type="range" min="0" max="1" value="0.5" class="slider" id="aligny" step="0.01"></td>
+	  <td><span id="alignyv"></span></td>
+	</tr>
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+	<tr class="slidecontainer">
+		<td>Offset X</td>
+	  <td><input type="range" min="-200" max="200" value="0" class="slider" id="offsetx" step="1"></td>
+	  <td><span id="offsetxv"></span></td>
+	</tr>
+	<tr class="slidecontainer">
+		<td>Offset Y</td>
+	  <td><input type="range" min="-200" max="200" value="0" class="slider" id="offsety" step="1"></td>
+	  <td><span id="offsetyv"></span></td>
+	</tr>
+</table>
+
+	<div id="parent">
+		<span class="a">Parent</span>
+		<div class="offset" id="child">
+			<span class="a">Child</span>
+		<div class="offset" id="child1"></div>
+		</div>
+	</div>
+
+	<table><!-- 
+		<tr>
+			<td>TOP_LEFT</td>
+			<td>TOP</td>
+			<td>TOP_RIGHT</td>
+		</tr>
+		<tr>
+			<td>LEFT</td>
+			<td>CENTER</td>
+			<td>RIGHT</td>
+		</tr>
+		<tr>
+			<td>BOTTOM_LEFT</td>
+			<td>BOTTOM</td>
+			<td>BOTTOM_RIGHT</td>
+		</tr>
+	</table> -->
+
+	<span style="color:#bbb;">Зажмите CTRL, чтобы у Parent появился ползунок изменения размера в правом нижнем углу</span>
+
+	<script type="text/javascript">
+		var originx = document.getElementById("originx"); var originxv = document.getElementById("originxv");
+		var originy = document.getElementById("originy"); var originyv = document.getElementById("originyv");
+		var alignx = document.getElementById("alignx"); var alignxv = document.getElementById("alignxv");
+		var aligny = document.getElementById("aligny"); var alignyv = document.getElementById("alignyv");
+		var offsetx = document.getElementById("offsetx"); var offsetxv = document.getElementById("offsetxv");
+		var offsety = document.getElementById("offsety"); var offsetyv = document.getElementById("offsetyv");
+
+
+		var parent = document.getElementById("parent");
+		var child = document.getElementById("child");
+		var child1 = document.getElementById("child1");
+
+
+		function update() {
+			child.style.transform = `translateX(${-originx.value*100}%) translateY(${-originy.value*100}%) translateX(${offsetx.value}px) translateY(${offsety.value}px)`
+			child.style.left = 500 * alignx.value;
+			child.style.top = 340 * aligny.value;
+			child1.style.left = child.clientWidth * originx.value;
+			child1.style.top = child.clientHeight * originy.value;
+			originxv.innerText = originx.value == 0 ? "LEFT" : originx.value == 1 ? "RIGHT" : originx.value == 0.5 ? "CENTER" : originx.value;
+			originyv.innerText = originy.value == 0 ? "TOP" : originy.value == 1 ? "BOTTOM" : originy.value == 0.5 ? "CENTER" : originy.value;
+			alignxv.innerText = alignx.value == 0 ? "LEFT" : alignx.value == 1 ? "RIGHT" : alignx.value == 0.5 ? "CENTER" : alignx.value;
+			alignyv.innerText = aligny.value == 0 ? "TOP" : aligny.value == 1 ? "BOTTOM" : aligny.value == 0.5 ? "CENTER" : aligny.value;
+			offsetxv.innerText = offsetx.value
+			offsetyv.innerText = offsety.value
+		}
+
+		document.body.onkeydown = function(e) {
+			if (e.key == "Control") {
+				parent.style.overflow = "hidden"
+				parent.style.resize = "both"
+			}
+		}
+
+		document.body.onkeyup = function(e) {
+			if (e.key == "Control") {
+				parent.style.overflow = "visible"
+				parent.style.resize = "none"
+			}
+		}
+
+		update()
+
+		// Update the current slider value (each time you drag the slider handle)
+		originx.oninput = update
+		originy.oninput = update
+		alignx.oninput = update
+		aligny.oninput = update
+		offsetx.oninput = update
+		offsety.oninput = update
+	</script>
+
+</body>
+</html>
