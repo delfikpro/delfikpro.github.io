@@ -133,7 +133,13 @@
 		</tr>
 	</table> -->
 
-	<span style="color:#bbb;">Зажмите CTRL, чтобы у Parent появился ползунок изменения размера в правом нижнем углу</span>
+	<span style="color:#bbb;">
+		Align сдвигает элемент в процентах от размера родителя<br>
+		Origin сдвигает элемент в процентах от размера самого элемента<br>
+		Offset сдвигает элемент в пикселях<br><br>
+
+		Зажмите CTRL, чтобы у Parent появился ползунок изменения размера в правом нижнем углу<br>
+	</span>
 
 	<script type="text/javascript">
 		var originx = document.getElementById("originx"); var originxv = document.getElementById("originxv");
@@ -151,8 +157,8 @@
 
 		function update() {
 			child.style.transform = `translateX(${-originx.value*100}%) translateY(${-originy.value*100}%) translateX(${offsetx.value}px) translateY(${offsety.value}px)`
-			child.style.left = 500 * alignx.value;
-			child.style.top = 340 * aligny.value;
+			child.style.left = parent.clientWidth * alignx.value;
+			child.style.top = parent.clientHeight * aligny.value;
 			child1.style.left = child.clientWidth * originx.value;
 			child1.style.top = child.clientHeight * originy.value;
 			originxv.innerText = originx.value == 0 ? "LEFT" : originx.value == 1 ? "RIGHT" : originx.value == 0.5 ? "CENTER" : originx.value;
@@ -162,6 +168,13 @@
 			offsetxv.innerText = offsetx.value
 			offsetyv.innerText = offsety.value
 		}
+
+		let isMouseDown = false;
+		document.onmousedown = function() { isMouseDown = true  };
+		document.onmouseup   = function() { isMouseDown = false };
+		document.onmousemove = function() { if(isMouseDown) { update() } };
+
+		setInterval(update, 200)
 
 		document.body.onkeydown = function(e) {
 			if (e.key == "Control") {
@@ -186,6 +199,9 @@
 		aligny.oninput = update
 		offsetx.oninput = update
 		offsety.oninput = update
+
+		parent.onresize = update
+		child.onresize = update
 	</script>
 
 </body>
