@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+
+        function get_location() {
+            navigator.geolocation.getCurrentPosition(success, error);
+        }
+
+        function success(position) {
+            alert(position.coords.latitude + " " + position.coords.longitude);
+        }
+
+        function error() {
+            alert("Error");
+        }
+
+    </script>
+
+    <button onclick="get_location()">Get location</button>
+</body>
+</html>
